@@ -25,16 +25,44 @@ bearRouter.post('/bears', (req, res) => {
     res.status(STATUS_BAD_REQUEST).json({ errorMessage: "Please provide both species and latinName for the Bear." });
   }
 })
+
 bearRouter.get('/bears', (req, res) => {
-  
-})
+    Bear.find({})
+      .then(bears => {
+        res.status(200).json(bears);
+      })
+      .catch(err => {
+        res.status(500).json({ error: "The information could not be retrieved." });
+      });
+  });
+
 bearRouter.get('/bears/:id', (req, res) => {
-  
-})
+  Bear.findById(req.params.id)
+    .then(id => {
+      res.status(200).json(id);
+    })
+      .catch(err => {
+        res.status(404).json({ message: "The Bear with the specified ID does not exist." })
+      })
+  })
+
+
 bearRouter.delete('/bears/:id', (req, res) => {
-  
+  Bear.findByIdAndRemove(req.params.id)
+  .then(id => {
+    res.status(200).json(bears);
+  })
+  .catch(err => {
+    res.status(404).json({ message: "The Bear with the specified ID does not exist." })
 })
+
 bearRouter.put('/bears/:id', (req, res) => {
+  Bear.findByIdAndUpdate(req.params.id)
+  .save(id => {
+    res.status(200)
+  })
+  .then
+
   
 })
 
